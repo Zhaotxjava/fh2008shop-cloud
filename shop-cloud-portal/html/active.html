@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- Bootstrap -->
+</head>
+<body>
+<h1 style="color: green">用户未激活,点击<a href="#" onclick="sendActiveMall()">激活</a>发送邮箱！</h1>
+
+
+</body>
+
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../js/jquery.cookie.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="../js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+    function  sendActiveMall() {
+        var v_data=$.cookie("data")
+        console.log(v_data);
+
+        $.ajax({
+            type:"post",
+            url:server_ip+"",
+            contentType:"application/json",
+            data:v_data,
+            success:function (res) {
+                if (res.code ==200){
+
+                }
+
+            }
+        })
+
+
+    }
+</script>
+</html>

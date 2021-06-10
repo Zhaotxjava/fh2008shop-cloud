@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+ <div id="app">
+    图书名：<input type="text" v-model="bookName">
+    价格：<input type="text" v-model="price">
+     <input  type="button" value="增加图书" v-on:click="addBook()">
+
+ <table>
+     <tr>
+         <th>图书名</th>
+         <th>价格</th>
+         <th>操作</th>
+     </tr>
+     <tr v-for="book in books">
+         <td>{{book.bookName}}</td>
+         <td>{{book.price}}</td>
+         <td><input type="button" value="删除" v-on:click="v ()"/></td>
+     </tr>
+ </table>
+ </div>
+ <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script>
+ new Vue({
+     el:"#app",
+     data:{
+         bookName:"",
+         price:"",
+         books:[]
+     },
+     methods:{
+         addBook(){
+             var v_book={};
+             v_book.bookName=this.bookName;
+             v_book.price=this.price;
+             this.books.push(v_book);
+             this.bookName="";
+             this.price="";
+         }
+     }
+ })
+</script>
+</body>
+</html>

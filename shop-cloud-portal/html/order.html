@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+	<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../js/shop/css/webbase.css" />
+	<link rel="stylesheet" type="text/css" href="../js/shop/css/pages-JD-index.css" />
+	<link rel="stylesheet" type="text/css" href="../js/shop/css/widget-jquery.autocomplete.css" />
+	<link rel="stylesheet" type="text/css" href="../js/shop/css/widget-cartPanelView.css" />
+	<title>注册页面</title>
+</head>
+<body>
+<table class="table table-bordered" id="orderTable">
+	<thead>
+	<tr>
+		<th>订单编号</th>
+		<th>金额</th>
+		<th>商品数量</th>
+		<th>创建时间</th>
+		<th>订单状态</th>
+		<th>收货人</th>
+		<th>地址</th>
+		<th>电话</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../js/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/jquery.cookie.min.js"></script>
+<script src="../js/common.js"></script>
+
+<script>
+    $(function () {
+        initOrderList();
+    });
+    function initOrderList() {
+        $.ajax({
+            type:"post",
+            url:server_ip+"/orders/queryOrder",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth", $.cookie("x-auth"))
+            },
+            success:function (res) {
+                console.log(res)
+                if (res.code==200){
+                    var v_orderList=res.data;
+                    var v_html="";
+                    for (let v_order of v_orderList){
+                        var v_status=v_order.status;
+                        var v_statusTest="";
+                        if (v_status==0){
+                            v_statusTest="未支付";
+                        }else if (v_status==10){
+                            v_statusTest="已支付";
+                        }else if (v_status==40){
+                            v_statusTest="交易关闭";
+                        }
+                        v_html+='<tr>';
+                        v_html+='<td>'+v_order.id+'</td>';
+                        v_html+='<td style="color: red;font-weight: bold">￥'+v_order.totalPrice+'</td>';
+                        v_html+='<td>'+v_order.totalCount+'</td>';
+                        v_html+='<td>'+v_order.createTime+'</td>';
+                        v_html+='<td>'+v_statusTest+'</td>';
+                        v_html+='<td>'+v_order.recipientName+'</td>';
+                        v_html+='<td>'+v_order.recipientAddr+'</td>';
+                        v_html+='<td>'+v_order.recipientPhone+'</td>';
+                        v_html+='<td><a href="#" onclick="cancel(\''+v_order.id+'\')">取消</a>/<a href="#" onclick="aliPay(\''+v_order.id+'\')">支付</a>/<a href="#" onclick="deleteOrder(\''+v_order.id+'\')">删除</a></td>';
+                        v_html+='</tr>';
+                    }
+                    $("#orderTable tbody").html(v_html);
+                }else {
+                    location.href="login.html";
+                }
+            }
+        })
+    }
+
+
+
+    //取消订单
+    function cancel(id) {
+        console.log(id);
+        $.ajax({
+            type:"post",
+            url:server_ip+"/orders/cnceltheorder/",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth", $.cookie("x-auth"))
+            },
+			data:{"id":id},
+
+            success:function (res) {
+                if (res.code==200) {
+                    alert("取消订单成功！");
+                    initOrderList();
+                }
+            }
+        })
+    }
+
+    //支付
+
+    function aliPay(id) {
+        $.ajax({
+            type:"post",
+            url:server_ip+"/pays/aliPay",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth", $.cookie("x-auth"))
+            },
+            data:{"id":id},
+            success:function (res) {
+           		$("body").html(res.data);
+            }
+
+        })
+    }
+
+    //删除订单
+    function deleteOrder(id) {
+        $.ajax({
+            type:"post",
+            url:server_host+"/orders/deleteOrder",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth", $.cookie("x-auth"))
+            },
+            data:{"id":id},
+            success:function (res) {
+                if (res.code==200){
+                    alert("删除成功！")
+                    initOrderList();
+                }
+
+            }
+
+        })
+    }
+
+
+
+
+</script>
+</body>
+</html>

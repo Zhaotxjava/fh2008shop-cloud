@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+<div id="info">
+    <select>
+        <option value="-1">--请选择--</option>
+        <option v-for="book in boxoks" :value="book.id">
+            {{book.bookName}}
+        </option>
+    </select>
+</div>
+<script>
+  new Vue({
+        el:"#info",
+        data:{
+            books:[{id:1,bookName:"三国"},{id:2,bookName:"红楼"},{id:3,bookName:"西游"}]
+        }
+  })
+</script>
+</body>
+</html>

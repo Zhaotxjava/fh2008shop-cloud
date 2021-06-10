@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<title>结算页</title>
+
+	<link rel="stylesheet" type="text/css" href="../js/shop/css/webbase.css" />
+	<link rel="stylesheet" type="text/css" href="../js/shop/css/pages-getOrderInfo.css" />
+
+</head>
+
+<body>
+<!--head-->
+<div class="top">
+	<div class="py-container">
+		<div class="shortcut">
+			<ul class="fl">
+				<li class="f-item">品优购欢迎您！</li>
+				<li class="f-item">请登录　<span><a href="#">免费注册</a></span></li>
+			</ul>
+			<ul class="fr">
+				<li class="f-item">我的订单</li>
+				<li class="f-item space"></li>
+				<li class="f-item">我的品优购</li>
+				<li class="f-item space"></li>
+				<li class="f-item">品优购会员</li>
+				<li class="f-item space"></li>
+				<li class="f-item">企业采购</li>
+				<li class="f-item space"></li>
+				<li class="f-item">关注品优购</li>
+				<li class="f-item space"></li>
+				<li class="f-item">客户服务</li>
+				<li class="f-item space"></li>
+				<li class="f-item">网站导航</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="cart py-container">
+	<!--logoArea-->
+	<div class="logoArea">
+		<div class="fl logo"><span class="title">结算页</span></div>
+		<div class="fr search">
+			<form class="sui-form form-inline">
+				<div class="input-append">
+					<input type="text" type="text" class="input-error input-xxlarge" placeholder="品优购自营" />
+					<button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--主内容-->
+	<div class="checkout py-container">
+		<div class="checkout-tit">
+			<h4 class="tit-txt">填写并核对订单信息</h4>
+		</div>
+		<div class="checkout-steps">
+			<!--收件人信息-->
+			<div class="step-tit">
+				<h5>收件人信息<span><a data-toggle="modal" data-target=".edit" data-keyboard="false" class="newadd">新增收货地址</a></span></h5>
+			</div>
+			<div class="step-cont">
+				<div class="addressInfo">
+					<ul class="addr-detail">
+						<li class="addr-item"  id="shojianr">
+
+						</li>
+
+					</ul>
+					<!--添加地址-->
+					<div  tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade edit">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+									<h4 id="myModalLabel" class="modal-title">添加收货地址</h4>
+								</div>
+								<div class="modal-body" id="uedataPay">
+									<form action="" class="sui-form form-horizontal">
+										<input type="hidden" class="input-medium" id="id">
+										<div class="control-group">
+											<label class="control-label">收货人：</label>
+											<div class="controls">
+												<input type="text" class="input-medium" id="payName">
+											</div>
+										</div>
+
+										<div class="control-group">
+											<label class="control-label">详细地址：</label>
+											<div class="controls">
+												<input type="text" class="input-large" id="receives">
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label">联系电话：</label>
+											<div class="controls">
+												<input type="text" class="input-medium" id="phone">
+											</div>
+										</div>
+
+									</form>
+
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" data-ok="modal" class="sui-btn btn-primary btn-large" onclick="addPay()">确定</button>
+									<button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--确认地址-->
+				</div>
+				<div class="hr"></div>
+
+			</div>
+			<div class="hr"></div>
+			<!--支付和送货-->
+			<div class="payshipInfo">
+				<div class="step-tit">
+					<h5>支付方式</h5>
+				</div>
+				<div class="step-cont">
+					<ul class="payType">
+						<li class="selected">微信付款<span title="点击取消选择"></span></li>
+						<li>货到付款<span title="点击取消选择"></span></li>
+					</ul>
+				</div>
+				<div class="hr"></div>
+				<div class="step-tit">
+					<h5>送货清单</h5>
+				</div>
+				<div class="step-cont">
+					<ul class="send-detail">
+						<li  id="shangpinzhanshi">
+
+
+						</li>
+
+					</ul>
+				</div>
+				<div class="hr"></div>
+			</div>
+			<div class="linkInfo">
+				<div class="step-tit">
+					<h5>发票信息</h5>
+				</div>
+				<div class="step-cont">
+					<span>普通发票（电子）</span>
+					<span>个人</span>
+					<span>明细</span>
+				</div>
+			</div>
+			<div class="cardInfo">
+				<div class="step-tit">
+					<h5>使用优惠/抵用</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="shangpin2">
+
+	</div>
+	<div id="shangpin3">
+
+	</div>
+
+
+	<div class="submit">
+		<a class="sui-btn btn-danger btn-xlarge"     onclick="tijiao()">提交订单</a>
+	</div>
+</div>
+<!-- 底部栏位 -->
+<!--页面底部-->
+<div class="clearfix footer">
+	<div class="py-container">
+		<div class="footlink">
+			<div class="Mod-service">
+				<ul class="Mod-Service-list">
+					<li class="grid-service-item intro  intro1">
+
+						<i class="serivce-item fl"></i>
+						<div class="service-text">
+							<h4>正品保障</h4>
+							<p>正品保障，提供发票</p>
+						</div>
+
+					</li>
+					<li class="grid-service-item  intro intro2">
+
+						<i class="serivce-item fl"></i>
+						<div class="service-text">
+							<h4>正品保障</h4>
+							<p>正品保障，提供发票</p>
+						</div>
+
+					</li>
+					<li class="grid-service-item intro  intro3">
+
+						<i class="serivce-item fl"></i>
+						<div class="service-text">
+							<h4>正品保障</h4>
+							<p>正品保障，提供发票</p>
+						</div>
+
+					</li>
+					<li class="grid-service-item  intro intro4">
+
+						<i class="serivce-item fl"></i>
+						<div class="service-text">
+							<h4>正品保障</h4>
+							<p>正品保障，提供发票</p>
+						</div>
+
+					</li>
+					<li class="grid-service-item intro intro5">
+
+						<i class="serivce-item fl"></i>
+						<div class="service-text">
+							<h4>正品保障</h4>
+							<p>正品保障，提供发票</p>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix Mod-list">
+				<div class="yui3-g">
+					<div class="yui3-u-1-6">
+						<h4>购物指南</h4>
+						<ul class="unstyled">
+							<li>购物流程</li>
+							<li>会员介绍</li>
+							<li>生活旅行/团购</li>
+							<li>常见问题</li>
+							<li>购物指南</li>
+						</ul>
+
+					</div>
+					<div class="yui3-u-1-6">
+						<h4>配送方式</h4>
+						<ul class="unstyled">
+							<li>上门自提</li>
+							<li>211限时达</li>
+							<li>配送服务查询</li>
+							<li>配送费收取标准</li>
+							<li>海外配送</li>
+						</ul>
+					</div>
+					<div class="yui3-u-1-6">
+						<h4>支付方式</h4>
+						<ul class="unstyled">
+							<li>货到付款</li>
+							<li>在线支付</li>
+							<li>分期付款</li>
+							<li>邮局汇款</li>
+							<li>公司转账</li>
+						</ul>
+					</div>
+					<div class="yui3-u-1-6">
+						<h4>售后服务</h4>
+						<ul class="unstyled">
+							<li>售后政策</li>
+							<li>价格保护</li>
+							<li>退款说明</li>
+							<li>返修/退换货</li>
+							<li>取消订单</li>
+						</ul>
+					</div>
+					<div class="yui3-u-1-6">
+						<h4>特色服务</h4>
+						<ul class="unstyled">
+							<li>夺宝岛</li>
+							<li>DIY装机</li>
+							<li>延保服务</li>
+							<li>品优购E卡</li>
+							<li>品优购通信</li>
+						</ul>
+					</div>
+					<div class="yui3-u-1-6">
+					</div>
+				</div>
+			</div>
+			<div class="Mod-copyright">
+				<ul class="helpLink">
+					<li>关于我们<span class="space"></span></li>
+					<li>联系我们<span class="space"></span></li>
+					<li>关于我们<span class="space"></span></li>
+					<li>商家入驻<span class="space"></span></li>
+					<li>营销中心<span class="space"></span></li>
+					<li>友情链接<span class="space"></span></li>
+					<li>关于我们<span class="space"></span></li>
+					<li>营销中心<span class="space"></span></li>
+					<li>友情链接<span class="space"></span></li>
+					<li>关于我们</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="dizhiDiv" style="display:none;">
+	<div>
+	<div class="con name  #status#"><a href="javascript:;" onclick="ueldataPay('#id#')">#payName#<span title="点击取消选择">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+	<div class="con address">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#payName#&nbsp;#receives#<span>#phone#</span>
+			##statusss##
+		<span style="display: none"><span><a data-toggle="modal" data-target=".edit" data-keyboard="false" onclick="uelPay('#id#')">编辑</a><a href="javascript:;">删除</a></span>
+	</div>
+	<div class="clearfix"></div>
+	</div>
+</div>
+
+
+<div id="shangpin" style="display:none;">
+	<div class="order-summary">
+		<div class="static fr">
+			<div class="list">
+				<span><i class="number">#totalCount#</i>件商品，总商品金额</span>
+				<em class="allprice">¥#totalPrice#</em>
+			</div>
+			<div class="list">
+				<span>返现：</span>
+				<em class="money">0.00</em>
+			</div>
+			<div class="list">
+				<span>运费：</span>
+				<em class="transport">0.00</em>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div id="ssssd" style="display:none;">
+<div class="clearfix trade" >
+	<div class="fc-price">应付金额:　<span class="price">#totalPrice#</span></div>
+	<div class="fc-receiverInfo">寄送至:#aaaa# 收货人：#ssss# #dddd#</div>
+</div>
+</div>
+<div id="sahngpinDiv" style="display:none;"> <div class="sendGoods">
+	<ul class="yui3-g">
+		<li class="yui3-u-1-6">
+			<span><img src="#skuImage#" style="height: 100px;"/></span>
+		</li>
+		<li class="yui3-u-7-12">
+			<div class="desc">#skuName#</div>
+			<div class="seven">7天无理由退货</div>
+		</li>
+		<li class="yui3-u-1-12">
+			<div class="price">#subPrice#</div>
+		</li>
+		<li class="yui3-u-1-12">
+			<div class="num">X#count#</div>
+		</li>
+		<li class="yui3-u-1-12">
+			<div class="exit">有货</div>
+		</li>
+	</ul>
+</div></div>
+
+<script type="text/javascript" src="../js/shop/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/shop/js/plugins/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../js/shop/js/plugins/sui/sui.min.js"></script>
+
+<script type="text/javascript" src="../js/shop/js/pages/getOrderInfo.js"></script>
+<script type="text/javascript" src="../js/shop/js/pages/index.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../js/jquery.cookie.min.js"></script>
+<script src="../js/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/bootbox/bootbox.all.min.js"></script>
+</body>
+<script>
+
+
+    $(function () {
+        findPay();
+        findCart();
+
+    })
+
+	function initEvent() {
+        $(".con.address").hover(function (){
+            $(this).children().last().show();
+		},function () {
+            $(this).children().last().hide();
+        })
+
+    }
+    var dizhixinx;
+
+    function findPay() {
+        $.ajax({
+            url: server_ip+"/pays/findPay",
+            type: "post",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth", $.cookie("x-auth"))
+            },
+            success: function (result) {
+               // console.log(result)
+                 dizhixinx = result.data;
+              //  console.log(dizhixinx)
+
+                var v_html='';
+                var v_html2 =$("#dizhiDiv").html()
+
+                for(let dz of dizhixinx){
+
+                   	 	v_html += v_html2.replace(/#payName#/g,dz.payName)
+										.replace(/#receives#/g,dz.receives)
+										.replace(/#phone#/g,dz.phone)
+										.replace(/#id#/g,dz.id)
+										.replace(/#status#/g,dz.status ==1?"selected":"")
+										.replace(/##statusss##/g,dz.status ==1?"<span class=\"base\">默认地址</span>":"")
+
+                }
+                $("#shojianr").html(v_html);
+
+
+                if (dizhixinx.status==1){}
+                initEvent();
+            }
+
+        })
+
+    }
+
+    function addPay() {
+        var v_parem={};
+        v_parem.id=$("#id").val()
+        v_parem.payName=$("#payName").val();
+        v_parem.receives=$("#receives").val();
+        v_parem.phone=$("#phone").val();
+     	// console.log(v_parem)
+        $.ajax({
+            url: server_ip+"/pays/addPay",
+            type: "post",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth", $.cookie("x-auth"))
+            },
+			data:v_parem,
+            success: function (result) {
+               // console.log(result)
+             	if (result.code==200){
+                    findPay();
+                    findCart();
+				}
+            }
+
+        })
+		
+    }
+		var mrtj;
+    function findCart() {
+        $.ajax({
+            type:"get",
+            url:server_ip+"/carts/findCart",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth", $.cookie("x-auth"))
+            },
+            success:function (result) {
+
+
+                var v_skulist = result.data.cartItemVo;
+            //    console.log(v_skulist)
+                var v_total = result.data;
+                var v_html=''
+                var v_html22 =$("#sahngpinDiv").html()
+                for(let sku of v_skulist){
+
+                    v_html +=v_html22.replace(/#skuImage#/g,sku.skuImage).replace(/#count#/g,sku.count).replace(/#subPrice#/g,sku.subPrice).replace(/#skuName#/g,sku.skuName)
+
+                }
+                $("#shangpinzhanshi").html(v_html);
+                var v_html2=''
+                var v_html3 =$("#shangpin").html()
+
+                    v_html2=v_html3.replace(/#totalCount#/g,v_total.totalCount)
+								   .replace(/#totalPrice#/g,v_total.totalPrice)
+
+                $("#shangpin2").html(v_html2);
+
+				var v_sttp='';
+                var v_html6 =$("#ssssd").html()
+               	 for(let zd of  dizhixinx){
+                  if (zd.status==1){
+                      console.log(zd)
+					  mrtj=zd;
+                      v_sttp=v_html6.replace(/#totalPrice#/g,v_total.totalPrice)
+						     .replace(/#aaaa#/g,zd.receives)
+						  	 .replace(/#ssss#/g,zd.payName)
+						 	 .replace(/#dddd#/g,zd.phone)
+
+					}
+                     $("#shangpin3").html(v_sttp);
+				 }
+
+            }
+        })
+    }
+
+
+    function ueldataPay(id) {
+
+        $.ajax({
+            type:"post",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth",$.cookie("x-auth"))
+            },
+            url:server_ip+"/pays/ueldataCart",
+			data:{"id":id},
+            success:function (result) {
+            //    console.log(result)
+					if (result.code==200){
+                        findPay();
+                        findCart();
+					}
+            }
+        })
+
+
+    }
+
+    function uelPay(id) {
+			console.log(id);
+
+        for(let zd of  dizhixinx){
+            if ( zd.id==id) {
+                mrtj=zd;
+                $("#id").val(zd.id);
+                $("#payName").val(zd.payName);
+                $("#receives").val(zd.receives);
+                $("#phone").val(zd.phone);
+			}
+		}
+    }
+    function tijiao() {
+
+        if (!mrtj){
+            alert("请选择收货人")
+            return;
+		}
+        console.log(mrtj.id)
+        $.ajax({
+            type:"post",
+            beforeSend: function (request) {
+                request.setRequestHeader("x-auth",$.cookie("x-auth"))
+            },
+            url:server_ip+"/orders/addOrder",
+            data:{"id":mrtj.id},
+            success:function (result) {
+                //    console.log(result)
+                if (result.code==200){
+                    location.href="order.html"
+
+                }
+            }
+        })
+    }
+
+
+
+</script>
+
+</html>

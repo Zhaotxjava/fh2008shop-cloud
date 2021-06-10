@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+ <div id="box">
+    学生名:<input type="text" v-model="stuName"/>
+     年龄：<input type="text" v-model="age">
+     <input type="button" value="增加学生" v-on:click="add()">
+     <table>
+            <tr>
+                <td>学生名</td>
+                <td>年龄</td>
+            </tr>
+            <tr v-for="s in students" >
+                <td>{{s.stuName}}</td>
+                <td>{{s.age}}</td>
+            </tr>
+     </table>
+ </div>
+<script>
+ new Vue({
+     el:"#box",
+     data:{
+         stuName:"",
+         age:"",
+         students:[]
+     },
+     methods:{
+         add(){
+             var user={};
+             user.stuName =this.stuName;
+             user.age =this.age;
+             this.students.push(user);
+         }
+
+
+     }
+ })
+</script>
+</body>
+</html>

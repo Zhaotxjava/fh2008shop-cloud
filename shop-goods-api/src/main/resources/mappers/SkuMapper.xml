@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.api.sku.mapper.ISkuMapper">
+    <select id="queryUpRecommedList" resultType="com.fh.shop.api.sku.po.Sku">
+        select s.id,s.skuName,s.price,s.image from t_sku s LEFT JOIN t_spu p on s.spuId=p.id where p.isup=1 and p.isnew=1 and p.state=1
+    </select>
+
+    <update id="updateSkuStock" parameterType="com.fh.shop.api.sku.vo.UpdateSkuVo">
+     update t_sku set stock =stock-#{stock} WHERE id = #{skuId} and stock >= #{stock}
+
+    </update>
+    <update id="updateCount">
+     update t_sku set stock =stock+#{skuCount} WHERE id = #{skuId}
+    </update>
+
+    <update id="updateSales">
+     update t_sku set sales =sales+#{skuCount} WHERE id = #{skuId}
+    </update>
+
+</mapper>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>编易健康</title>
+    <meta name="description" content="编易健康">
+    <meta name="keywords" content="编易健康">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 引入组件库 -->
+    <script src="../plugins/elementui/index.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+    <style>
+        .datatable {
+            position: relative;
+            box-sizing: border-box;
+            -webkit-box-flex: 1;
+            width: 100%;
+            max-width: 100%;
+            font-size: 14px;
+            color: rgb(96, 98, 102);
+            overflow: hidden;
+            flex: 1 1 0%;
+        }
+        .datatable td, .datatable th {
+            padding: 12px 0;
+            min-width: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+            position: relative;
+            text-align: left;
+        }
+    </style>
+
+    <link href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">会员名称</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="memberName" placeholder="会员名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">密码</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="password" placeholder="密码">
+                    </div>
+                </div>
+            </form>
+            <div align="center">
+                <button type="button" onclick="login()" class="btn btn-primary">登陆</button>
+                <button type="reset" class="btn btn-primary">重置</button>
+                <button type="button" onclick="location.href='forgetPassword.html'" class="btn btn-primary">忘记密码</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../js/jquery.cookie.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="../js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+    function login() {
+        $.ajax({
+            url:"http://localhost:9000/members/api"+"/member/login",
+            data: {"memberName": $("#memberName").val(), "password": $("#password").val()},
+            type: "post",
+            success: function (result) {
+                console.log(result)
+                if (result.code == 200) {
+                    var data = result.data;
+                    $.cookie("x-auth", data);
+                    location.href = "index.html"
+
+                }else {
+                    if(result.code==3017){
+                        var data = result.data;
+                        $.cookie("data",  JSON.stringify(data) );
+                        console.log(data)
+                        location.href = "active.html"
+                    }
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
